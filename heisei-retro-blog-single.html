@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>★☆ 電脳喫茶・夢見荘 ☆★</title>
+  <style>
+@charset "UTF-8";
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  color: #222;
+  font-family: "MS PGothic", "ＭＳ Ｐゴシック", "Meiryo", sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  background-color: #ffb9e6;
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,.75) 1px, transparent 2px),
+    repeating-linear-gradient(45deg, rgba(255,255,255,.22) 0 8px, rgba(255,0,180,.08) 8px 16px);
+  background-size: 19px 19px, 100% 100%;
+}
+a { color: #0000ee; text-decoration: underline; }
+a:visited { color: #800080; }
+a:hover { color: #ff0080; background: #ffff00; }
+.topline { text-align: center; background: #000080; color: #fff; padding: 4px; font-weight: bold; }
+.site-header {
+  max-width: 1000px; margin: 14px auto 10px; padding: 18px 12px;
+  text-align: center; color: #fff; border: 4px ridge #ffccff;
+  background: linear-gradient(135deg, #160078, #d000a9 55%, #ff8b00);
+  text-shadow: 2px 2px #000;
+}
+.site-header h1 { font-size: clamp(28px, 5vw, 48px); margin: 0; letter-spacing: 3px; }
+.subtitle { margin: 0 0 8px; color: #ffff66; }
+.sparkle { font-size: 24px; color: #ffff00; }
+.rainbow { color: #00ffff; overflow: hidden; white-space: nowrap; }
+marquee { color: #ffff00; font-weight: bold; }
+.layout { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 230px minmax(0, 1fr); gap: 12px; padding: 0 8px; align-items: start; }
+.sidebar { display: grid; gap: 12px; }
+.panel, .box { border: 3px ridge #ff66cc; background: #fffde9; padding: 12px; box-shadow: 3px 3px 0 rgba(90,0,90,.25); margin-bottom: 12px; }
+.panel h2, .box h2 { font-size: 17px; color: #fff; margin: -12px -12px 12px; padding: 5px 8px; background: linear-gradient(90deg, #000080, #d000a9); border-bottom: 2px solid #ffff00; }
+.sidebar nav { display: grid; gap: 4px; }
+.sidebar nav a { display: block; padding: 4px 6px; background: #e7e7ff; border: 1px outset #aaaaff; font-weight: bold; }
+.profile p { margin: 5px 0; }
+.avatar { background: #ccffff; color: #ff0099; border: 2px dotted #0000aa; text-align: center; padding: 12px 2px; font-size: 25px; font-weight: bold; }
+.tiny { font-size: 11px; color: #555; }
+.blink { animation: blink 1s steps(2, start) infinite; color: #f00080; font-weight: bold; text-align: center; }
+@keyframes blink { to { visibility: hidden; } }
+.badge-button { border: 3px outset #ffff99; margin: 7px auto; max-width: 180px; text-align: center; padding: 5px; font-size: 12px; font-weight: bold; color: #000080; background: linear-gradient(#ffffcc, #ff99cc); }
+.badge-button.blue { color: #fff; background: linear-gradient(#000080, #00aaff); }
+.badge-button.pink { color: #ff00aa; background: #fff; border-style: dotted; }
+.center { text-align: center; }
+.entry { border: 1px dashed #d000a9; padding: 10px; margin: 12px 0; background: #fff; }
+.entry-date { color: #fff; background: #008080; display: inline-block; padding: 1px 8px; font-size: 12px; }
+.entry h3 { color: #000080; border-bottom: 1px dotted #000080; margin: 8px 0; }
+.entry-foot { text-align: right; font-size: 11px; color: #666; border-top: 1px dotted #ccc; padding-top: 4px; }
+ul { padding-left: 24px; }
+.link-list li { margin: 7px 0; }
+.web-ring { border: 3px double #000080; background: #ffff99; padding: 10px; margin-bottom: 12px; }
+footer { text-align: center; max-width: 1000px; margin: 10px auto 0; padding: 12px; background: #000080; color: #fff; border-top: 4px ridge #ffccff; }
+footer a { color: #ffff00; }
+form { display: grid; gap: 8px; }
+label { display: grid; gap: 4px; font-weight: bold; }
+input, textarea { width: 100%; border: 2px inset #ccc; padding: 7px; font: inherit; background: #fff; }
+textarea { min-height: 70px; resize: vertical; }
+button { border: 3px outset #ddd; padding: 6px 10px; background: #e6e6ff; color: #000080; font-weight: bold; cursor: pointer; }
+button:active { border-style: inset; }
+.guest-entry { border: 1px dotted #008080; background: #f0ffff; padding: 8px; margin-top: 8px; overflow-wrap: anywhere; }
+.guest-entry strong { color: #d000a9; }
+@media (max-width: 700px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar { grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); }
+  .site-header { margin: 8px; }
+  .site-header h1 { letter-spacing: 0; }
+}
+
+  </style>
+</head>
+<body>
+  <div class="topline">★☆ ようこそ！あなたは <span id="counter">000001</span> 人目のお客様です ☆★</div>
+  <header class="site-header">
+    <div class="sparkle">｡･:*:･ﾟ★,｡･:*:･ﾟ☆</div>
+    <h1>電脳喫茶・夢見荘</h1>
+    <p class="subtitle">～ 迷い込んだ人のための、インターネットの片隅 ～</p>
+    <div class="rainbow">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
+    <marquee scrollamount="4">★☆★ ようこそ夢見荘へ！ 初めての方は「はじめに」を読んでね！ ★☆★ キリ番を踏んだ方はBBSで報告してくれるとうれしいです！ ★☆★</marquee>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <section class="panel">
+        <h2>◆ MENU ◆</h2>
+        <nav>
+          <a href="index.html">★ TOP</a>
+          <a href="#diary">日記 / DIARY</a>
+          <a href="#profile">管理人について</a>
+          <a href="#bbs">BBS（仮）</a>
+          <a href="#links">リンク集</a>
+          <a href="#rules">はじめに</a>
+        </nav>
+      </section>
+      <section class="panel profile" id="profile">
+        <h2>管理人</h2>
+        <div class="avatar">（・ω・）</div>
+        <p><b>HN：</b>ねむりネコ</p>
+        <p><b>生息地：</b>ネットのすみっこ</p>
+        <p><b>好き：</b>夜更かし / 廃墟 / 古いPC</p>
+        <p class="tiny">※ ここは架空の個人サイトです。</p>
+      </section>
+      <section class="panel">
+        <h2>◆ お知らせ ◆</h2>
+        <p class="blink">★ 工事中 ★</p>
+        <p>リンクページを改装中です。気長に待ってね！</p>
+        <hr>
+        <p class="tiny">推奨環境：IEっぽい気分のブラウザ<br>画面解像度：気合いで！</p>
+      </section>
+      <section class="panel badges">
+        <h2>同盟・バナー</h2>
+        <div class="badge-button">個人サイト<br>だいすき同盟</div>
+        <div class="badge-button blue">NO MUSIC<br>NO INTERNET</div>
+        <div class="badge-button pink">★ 夜行性 ★</div>
+      </section>
+    </aside>
+
+    <main>
+      <section class="welcome box">
+        <h2>★ はじめまして！ ★</h2>
+        <p>ここは管理人「ねむりネコ」が気まぐれに運営している個人サイトです。</p>
+        <p>日記を書いたり、好きなものを置いたり、特に意味もなく背景を派手にしたりしています。</p>
+        <p class="center blink">ゆっくりしていってね！！！</p>
+      </section>
+
+      <section class="box" id="rules">
+        <h2>◆ はじめにお読みください ◆</h2>
+        <ul>
+          <li>当サイトは個人の趣味で運営されています。</li>
+          <li>リンクは基本フリー……という設定です。</li>
+          <li>ネタバレ・苦手な話題は各自で自衛してください。</li>
+          <li>画面の向こうにも人がいることを忘れずに！</li>
+        </ul>
+        <p class="tiny">最終更新：2007年 4月 1日（という設定）</p>
+      </section>
+
+      <section class="box" id="diary">
+        <h2>◆ 管理人の日記 ◆</h2>
+        <article class="entry">
+          <div class="entry-date">2007/04/01　（日）　晴れ？</div>
+          <h3>サイト開設しました！</h3>
+          <p>ついに作ってしまった……！ HTMLとか全然わからないけど、見よう見まねで作ってみました。</p>
+          <p>背景がちょっと目に痛い気がするけど、たぶん気のせい。これから日記とか増やしていく予定です。</p>
+          <div class="entry-foot">カテゴリ：日常 / コメント（0）</div>
+        </article>
+        <article class="entry">
+          <div class="entry-date">2007/04/03　（火）　くもり</div>
+          <h3>インターネットって広い</h3>
+          <p>リンクをたどっていたら、気づけば知らないサイトを30個くらい巡回していた。ネットサーフィンってこういうことか。</p>
+          <p>いつか素敵な相互リンク先ができるといいな。キリ番は 1000 です。踏んだ方はぜひ報告を！</p>
+          <div class="entry-foot">カテゴリ：ネット / コメント（2）</div>
+        </article>
+        <article class="entry">
+          <div class="entry-date">2007/04/07　（土）　夜</div>
+          <h3>深夜のテンション</h3>
+          <p>夜中の2時にサイトをいじるのは危険。気づくと文字がピンクになっている。なぜだ。</p>
+          <p>次回はプロフィールをもっと充実させたいです。たぶん。</p>
+          <div class="entry-foot">カテゴリ：ひとりごと / コメント（1）</div>
+        </article>
+      </section>
+
+      <section class="box" id="bbs">
+        <h2>◆ ゲストブック / BBS（お試し版） ◆</h2>
+        <p>足あとを残していってね！ ※このデモの投稿は、このブラウザ内だけに保存されます。ネット上の全員には共有されません。</p>
+        <form id="guestbook-form">
+          <label>おなまえ：<input id="guest-name" maxlength="24" required placeholder="名無しさん"></label>
+          <label>ひとこと：<textarea id="guest-message" maxlength="240" required placeholder="遊びに来ました！"></textarea></label>
+          <button type="submit">書き込む</button>
+          <button type="button" id="clear-guestbook">自分のブラウザの投稿を消す</button>
+        </form>
+        <div id="guestbook-list" aria-live="polite"></div>
+      </section>
+
+      <section class="box" id="links">
+        <h2>◆ おともだち / LINK ◆</h2>
+        <p>素敵サイト様（サンプル）</p>
+        <ul class="link-list">
+          <li><a href="#links">★ 星屑図書館</a> …… 本と夜更かしのサイト</li>
+          <li><a href="#links">★ 午前二時の屋上</a> …… 写真と日記</li>
+          <li><a href="#links">★ ねこねこ同盟</a> …… ねこ好き集まれ！</li>
+        </ul>
+        <p class="tiny">※ 上のリンクは見本です。実在の外部サイトには移動しません。</p>
+      </section>
+
+      <div class="center web-ring">
+        <span>★☆★ キリ番報告待ってます ★☆★</span><br>
+        <a href="#bbs">BBSへ</a>　|　<a href="#diary">日記へ</a>　|　<a href="#profile">管理人へ</a>
+      </div>
+    </main>
+  </div>
+
+  <footer>
+    <p>Copyright (C) 2007 Nemuri-neko. All Rights Reserved.（という設定）</p>
+    <p>当サイトはリンクフリーです。バナーはそのうち作ります。</p>
+    <p class="tiny">This website is a fictional retro-style demo.</p>
+  </footer>
+  <script>
+// 2000年代風ブログのお遊び機能。外部サーバーにはデータを送信しません。
+const counterEl = document.querySelector("#counter");
+const counterKey = "yumemiso-visits";
+let visits = Number(localStorage.getItem(counterKey) || "0") + 1;
+localStorage.setItem(counterKey, String(visits));
+counterEl.textContent = String(visits).padStart(6, "0");
+
+const form = document.querySelector("#guestbook-form");
+const nameInput = document.querySelector("#guest-name");
+const messageInput = document.querySelector("#guest-message");
+const list = document.querySelector("#guestbook-list");
+const guestKey = "yumemiso-guestbook";
+
+function getEntries() {
+  try { return JSON.parse(localStorage.getItem(guestKey) || "[]"); }
+  catch { return []; }
+}
+function renderEntries() {
+  list.replaceChildren();
+  const entries = getEntries();
+  if (!entries.length) {
+    const p = document.createElement("p");
+    p.className = "tiny";
+    p.textContent = "まだ書き込みはありません。最初の訪問者になろう！";
+    list.append(p);
+    return;
+  }
+  entries.slice().reverse().forEach(entry => {
+    const article = document.createElement("article");
+    article.className = "guest-entry";
+    const head = document.createElement("div");
+    const strong = document.createElement("strong");
+    strong.textContent = entry.name;
+    const date = document.createElement("span");
+    date.className = "tiny";
+    date.textContent = "　" + entry.date;
+    const body = document.createElement("p");
+    body.textContent = entry.message;
+    head.append(strong, date);
+    article.append(head, body);
+    list.append(article);
+  });
+}
+form.addEventListener("submit", event => {
+  event.preventDefault();
+  const name = nameInput.value.trim();
+  const message = messageInput.value.trim();
+  if (!name || !message) return;
+  const entries = getEntries();
+  entries.push({ name, message, date: new Date().toLocaleString("ja-JP") });
+  localStorage.setItem(guestKey, JSON.stringify(entries.slice(-30)));
+  form.reset();
+  renderEntries();
+});
+document.querySelector("#clear-guestbook").addEventListener("click", () => {
+  if (confirm("このブラウザに保存された投稿をすべて消しますか？")) {
+    localStorage.removeItem(guestKey);
+    renderEntries();
+  }
+});
+renderEntries();
+
+  </script>
+</body>
+</html>
